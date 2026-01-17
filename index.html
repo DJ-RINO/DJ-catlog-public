@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dispensary Japan 2026 Catalog</title>
+    <!-- PDF生成用 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Jost:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- DESIGN SYSTEM: Modern Organic --- */
+        :root {
+            --bg-body: #fbfbfd;
+            --bg-section-dark: #1d1d1f;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --text-gold: #bfa065;
+            --accent-green: #3a5f4c;
+            --radius-card: 24px;
+
+            /* Typography Scale - Mobile Optimized */
+            --font-h1: 36px;
+            --font-h2: 28px;
+            --font-h3: 20px;
+            --font-body: 14px;
+            --font-small: 11px;
+            --font-caption: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            line-height: 1.5;
+            font-size: var(--font-body);
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3 {
+            font-family: 'Jost', sans-serif;
+            /* Headings default to Jost for stylized look where applicable */
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-family: 'Jost', sans-serif;
+            font-weight: 600;
+        }
+
+        h2 {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-size: var(--font-h2);
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            font-size: 12px;
+            color: var(--text-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+            font-family: 'Jost', sans-serif;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        section {
+            padding: 50px 24px;
+            border-bottom: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .full-height {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #000;
+            color: white;
+            padding-top: 100px;
+            padding-bottom: 60px;
+            text-align: center;
+            border-bottom: none;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Images & Logos */
+        .main-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.3));
+            border-radius: 10px;
+        }
+
+        .brand-logo-small {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .feature-img {
+            width: 100%;
+            height: 220px;
+            border-radius: var(--radius-card);
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+            background: #eee;
+        }
+
+        /* Cards */
+        .card {
+            background: #f5f5f7;
+            border-radius: var(--radius-card);
+            padding: 20px;
+            margin-bottom: 16px;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            page-break-inside: avoid;
+            position: relative;
+        }
+
+        .card-dark {
+            background: var(--bg-section-dark);
+            color: white;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: var(--font-h3);
+            margin: 0;
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+        }
+
+        .card-sub {
+            font-size: var(--font-small);
+            color: #888;
+            margin-bottom: 12px;
+        }
+
+        .card-dark .card-title {
+            color: white;
+        }
+
+        .card-dark .card-sub {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Prices */
+        .price-list {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            font-size: 13px;
+        }
+
+        .price-item.dark {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .price-item:last-child {
+            border-bottom: none;
+        }
+
+        .price-vol {
+            font-weight: 500;
+            font-family: 'Jost';
+            color: #555;
+        }
+
+        .price-item.dark .price-vol {
+            color: #aaa;
+        }
+
+        .price-val {
+            font-family: 'Jost', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        /* UI Elements */
+        .tag-new {
+            background: var(--text-gold);
+            color: white;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        .coa-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            width: fit-content;
+        }
+
+        .card-dark .coa-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .coa-content {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .coa-thumbnail {
+            width: 36px;
+            height: 50px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            color: #555;
+            text-align: center;
+        }
+
+        .qr-code-img {
+            width: 36px;
+            height: 36px;
+            background: white;
+            padding: 2px;
+            border-radius: 4px;
+        }
+
+        .qr-placeholder {
+            display: none;
+        }
+
+        .badge-text-main {
+            font-size: 10px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .badge-text-sub {
+            font-size: 9px;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .coa-details {
+            text-align: right;
+            font-size: 10px;
+            line-height: 1.3;
+            color: #444;
+        }
+
+        .card-dark .coa-details {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* PDF Download Button */
+        .pdf-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--bg-section-dark);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .pdf-btn {
+                display: none !important;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .full-height {
+                min-height: auto !important;
+                height: auto !important;
+            }
+
+            .hero {
+                height: 600px !important;
+                min-height: 600px !important;
+                padding: 60px 20px !important;
+            }
+
+            section {
+                padding: 30px 20px !important;
+            }
+
+            .feature-img {
+                height: 200px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="catalog">
+
+        <!-- 1. HERO -->
+        <section class="hero full-height">
+            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop"
+                class="hero-bg" alt="Background">
+
+            <div class="hero-content">
+                <img src="./image/dj_logo.png" class="main-logo" alt="Dispensary Japan Logo">
+
+                <p
+                    style="font-family: 'Jost'; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; color: #e0e0e0; font-size: 12px;">
+                    Entourage through life</p>
+                <h1 style="font-size: var(--font-h1); color: white; margin-bottom: 16px;">
+                    2026 Early Spring<br>Collection</h1>
+                <p style="font-size: 14px; color: rgba(255,255,255,0.8); margin-top: 8px; letter-spacing: 1px;">Premium
+                    Cannabinoids Catalog</p>
+            </div>
+        </section>
+
+        <!-- 2. MISSION -->
+        <section>
+            <p class="section-subtitle">OUR PHILOSOPHY</p>
+            <h2 style="font-size: 20px; font-weight: 600; line-height: 1.6; margin-bottom: 16px;">
+                カンナビノイドを<br>全ての必要な方々へ届け<br>夢を叶える世界を作る
+            </h2>
+            <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.8;">
+                私たちのゴールはカンナビノイドの正しい普及にあります。必要な人に正しく届けるためには私たちだけでは実現できません。皆様のコミュニティ・文化生活圏の中に存在する共通言語や信頼性によって届けられるものだと思います。当たり前にある安心と安全な原料を、正しい知識でお届けすることが私たちの使命です。
+            </p>
+        </section>
+
+        <!-- 3. RAW MATERIALS -->
+        <section id="raw-material">
+            <div class="product-header" style="margin-bottom: 30px;">
+                <p class="section-subtitle">RAW MATERIALS</p>
+                <h2 class="section-title">Isolates &<br>Distillates</h2>
+            </div>
+
+            <!-- CBD -->
+            <div class="card" style="border: 1px solid var(--text-gold);">
+                <div class="card-header">
+                    <h3 class="card-title">CBD</h3>
+                </div>
+                <p class="card-sub">Isolate</p>
+                <ul class="price-list">
+                    <li class="price-item"><span class="price-vol">100g</span><span
+                            class="price-val">400円<small>/g</small></span></li>
+                    <li class="price-item"><span class="price-vol">500g</span><span
+                            class="price-val">350円<small>/g</small></span></li>
+                    <li class="price-item"><span class="price-vol">1kg</span><span
+                            class="price-val">300円<small>/g</small></span></li>
+                </ul>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 15px;">
+                    <div class="coa-badge" style="margin-top: 0;">
+                        <div class="coa-content">
+                            <a href="./coa/CBD Isolate Powder COA.pdf" target="_blank">
+                                <div class="coa-thumbnail">PDF<br>COA</div>
+                            </a>
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=CBD_Isolate_COA"
+                                class="qr-code-img">
+                        </div>
+                        <div>
+                            <div class="badge-text-sub">TRACEABILITY</div>
+                            <div class="badge-text-main">Scan for Digital COA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CBG -->
+            <div class="card" style="border: 1px solid var(--text-gold);">
+                <div class="card-header">
+                    <h3 class="card-title">CBG</h3>
+                </div>
+                <p class="card-sub">Isolate</p>
+                <ul class="price-list">
+                    <li class="price-item"><span class="price-vol">100g</span><span
+                            class="price-val">650円<small>/g</small></span></li>
+                    <li class="price-item"><span class="price-vol">500g</span><span
+                            class="price-val">600円<small>/g</small></span></li>
+                    <li class="price-item"><span class="price-vol">1kg</span><span
+                            class="price-val">500円<small>/g</small></span></li>
+                </ul>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 15px;">
+                    <div class="coa-badge" style="margin-top: 0;">
+                        <div class="coa-content">
+                            <a href="./coa/CBG Isolate.pdf" target="_blank">
+                                <div class="coa-thumbnail">PDF<br>COA</div>
+                            </a>
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=CBG_Isolate_COA"
+                                class="qr-code-img">
+                        </div>
+                        <div>
+                            <div class="badge-text-sub">TRACEABILITY</div>
+                            <div class="badge-text-main">Scan for Digital COA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- H4CBD -->
+            <div class="card" style="border: 1px solid var(--text-gold);">
+                <div class="card-header">
+                    <h3 class="card-title">H4CBD</h3>
+                </div>
+                <p class="card-sub">Distillate</p>
+                <ul class="price-list">
+                    <li class="price-item"><span class="price-vol">100g</span><span
+                            class="price-val">650円<small>/g</small></span></li>
+                    <li class="price-item"><span class="price-vol">500g</span><span
+                            class="price-val">550円<small>/g</small></span></li>
+                    <li class="price-item"><span class="price-vol">1kg</span><span
+                            class="price-val">480円<small>/g</small></span></li>
+                    <li class="price-item"><span class="price-vol">3kg</span><span
+                            class="price-val">450円<small>/g</small></span></li>
+                </ul>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 15px;">
+                    <div class="coa-badge" style="margin-top: 0;">
+                        <div class="coa-content">
+                            <a href="./coa/3.11PPMH4CBD_Cannabinoid Profile Extended Analytes LCMSMS (Japan Limits)_Report.pdf"
+                                target="_blank">
+                                <div class="coa-thumbnail">PDF<br>COA</div>
+                            </a>
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=H4CBD_COA"
+                                class="qr-code-img">
+                        </div>
+                        <div>
+                            <div class="badge-text-sub">TRACEABILITY</div>
+                            <div class="badge-text-main">Scan for Digital COA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HHBD -->
+            <div class="card card-dark" style="border: 1px solid var(--text-gold);">
+                <div class="card-header">
+                    <h3 class="card-title" style="font-size: 22px;">HHBD</h3>
+                    <span class="tag-new">NEW</span>
+                </div>
+                <p class="card-sub">Distillate</p>
+                <ul class="price-list">
+                    <li class="price-item dark"><span class="price-vol">10g以下</span><span
+                            class="price-val">8,500円<small>/g</small></span></li>
+                    <li class="price-item dark"><span class="price-vol">99g以下</span><span
+                            class="price-val">8,000円<small>/g</small></span></li>
+                    <li class="price-item dark"><span class="price-vol">100g</span><span
+                            class="price-val">7,000円<small>/g</small></span></li>
+                    <li class="price-item dark"><span class="price-vol">300g</span><span
+                            class="price-val">6,500円<small>/g</small></span></li>
+                    <li class="price-item dark"><span class="price-vol">500g</span><span
+                            class="price-val">6,000円<small>/g</small></span></li>
+                    <li class="price-item dark"><span class="price-vol">1kg</span><span
+                            class="price-val">5,000円<small>/g</small></span></li>
+                </ul>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 15px;">
+                    <div class="coa-badge" style="margin-top: 0;">
+                        <div class="coa-content">
+                            <a href="./coa/HHBD_Mother_Cannabinoid Profile Extended Analytes LCMSMS (Japan Limits)_Report.pdf"
+                                target="_blank">
+                                <div class="coa-thumbnail">PDF<br>COA</div>
+                            </a>
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=HHBD_COA"
+                                class="qr-code-img">
+                        </div>
+                        <div>
+                            <div class="badge-text-sub">TRACEABILITY</div>
+                            <div class="badge-text-main">Scan for Digital COA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- H4CBH -->
+            <div class="card card-dark" style="border: 1px solid var(--text-gold);">
+                <div class="card-header">
+                    <h3 class="card-title" style="font-size: 22px;">H4CBH</h3>
+                </div>
+                <p class="card-sub">Distillate</p>
+                <ul class="price-list">
+                    <li class="price-item dark"><span class="price-vol">10g</span><span
+                            class="price-val">11,000円<small>/g</small></span></li>
+                    <li class="price-item dark"><span class="price-vol">100g</span><span
+                            class="price-val">9,900円<small>/g</small></span></li>
+                    <li class="price-item dark"><span class="price-vol">200g</span><span
+                            class="price-val">9,500円<small>/g</small></span></li>
+                    <li class="price-item dark"><span class="price-vol">300g</span><span
+                            class="price-val">9,000円<small>/g</small></span></li>
+                    <li class="price-item dark"><span class="price-vol">400g</span><span
+                            class="price-val">8,750円<small>/g</small></span></li>
+                    <li class="price-item dark"><span class="price-vol">500g</span><span
+                            class="price-val">8,500円<small>/g</small></span></li>
+                </ul>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 15px;">
+                    <div class="coa-badge" style="margin-top: 0;">
+                        <div class="coa-content">
+                            <a href="./coa/H4CBH-mother-COA.pdf" target="_blank">
+                                <div class="coa-thumbnail">PDF<br>COA</div>
+                            </a>
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=H4CBH_COA"
+                                class="qr-code-img">
+                        </div>
+                        <div>
+                            <div class="badge-text-sub">TRACEABILITY</div>
+                            <div class="badge-text-main">Scan for Digital COA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. IMPORT VAPE -->
+        <section id="import-vape" style="background: #000; color: white;">
+            <div class="product-header" style="margin-bottom: 30px;">
+                <p class="section-subtitle" style="color: var(--text-gold);">IMPORT VAPE</p>
+                <h2 class="section-title">CBD-HI JOYCE</h2>
+                <p style="color: #86868b; font-size: 12px;">From Colorado, USA.</p>
+            </div>
+
+            <img src="./image/JoyceTop - 11.png" class="feature-img" alt="JOYCE Vape Device"
+                style="object-fit: contain; background: #111;">
+
+            <div class="card card-dark" style="border: 1px solid #333;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
+                    <div>
+                        <h3 class="card-title" style="font-size: 20px;">3ml Capacity</h3>
+                        <div style="display: flex; gap: 10px; margin-top: 5px;">
+                            <span style="font-size: 10px; background: #333; padding: 3px 8px; border-radius: 4px;">USB-C
+                                Rechargeable</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="price-val" style="font-size: 13px; color: #aaa; text-decoration: line-through;">
+                            参考上代: 6,600円</div>
+                        <div class="price-val" style="font-size: 20px; color: white;">卸単価: 3,500円</div>
+                        <div style="font-size: 10px; color: #888;">MOQ: 6pcs</div>
+                    </div>
+                </div>
+
+                <h4 style="font-size: 12px; margin-bottom: 10px; color: var(--text-gold); letter-spacing: 0.1em;">
+                    TERPENE PROFILES</h4>
+                <div style="display: grid; gap: 8px;">
+                    <div
+                        style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 12px; font-size: 12px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                            <span style="font-weight: 500;"><span style="color: #fca5a5;">●</span> Cherry Blossom</span>
+                            <span style="opacity: 0.5; font-size: 10px;">Relax / Day</span>
+                        </div>
+                        <div style="font-size: 10px; color: rgba(255,255,255,0.7);">CBD: 1326mg</div>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 12px; font-size: 12px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                            <span style="font-weight: 500;"><span style="color: #6ee7b7;">●</span> Watermelon
+                                Skittles</span>
+                            <span style="opacity: 0.5; font-size: 10px;">Party</span>
+                        </div>
+                        <div style="font-size: 10px; color: rgba(255,255,255,0.7);">CBD: 1224mg / CBDV: 4.95mg / CBG:
+                            0.24mg</div>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.1); padding: 12px; border-radius: 12px; font-size: 12px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                            <span style="font-weight: 500;"><span style="color: #60a5fa;">●</span> Blueberry
+                                Cookies</span>
+                            <span style="opacity: 0.5; font-size: 10px;">Deep Relax / Night</span>
+                        </div>
+                        <div style="font-size: 10px; color: rgba(255,255,255,0.7);">CBD: 1224mg / CBDV: 4.86mg / CBG:
+                            0.27mg</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. HERB & PREROLL -->
+        <section id="herb">
+            <div class="product-header"
+                style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end;">
+                <div>
+                    <p class="section-subtitle">CREATOR'S BRAND</p>
+                    <h2 class="section-title">Herb & Preroll</h2>
+                    <p style="color: var(--text-secondary); font-size: 12px;">Created by Temp Hamacco</p>
+                </div>
+                <img src="./image/temp_logo.png" alt="Temp Logo" class="brand-logo-small">
+            </div>
+
+            <img src="./image/Gemini_Generated_Image_988gij988gij988g.png" class="feature-img" alt="Premium Ground Herb"
+                style="object-position: center;">
+
+            <!-- Creator's Premium -->
+            <div
+                style="font-family: 'Jost'; font-weight: 600; font-size: 16px; margin-bottom: 12px; border-left: 4px solid var(--text-gold); padding-left: 10px;">
+                Creator's Premium</div>
+
+            <div style="display: grid; gap: 8px; margin-bottom: 30px;">
+                <!-- H4CBH Series -->
+                <div class="card" style="margin:0; padding: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <strong style="font-size: 14px;">H4CBH ハーブ 3.5g OG <span
+                                style="font-size: 10px; color:#888;">(H4CBHたっぷり)</span></strong>
+                        <span style="color: var(--accent-green); font-weight: bold; font-family: 'Jost';">¥7,800</span>
+                    </div>
+                    <p style="font-size: 10px; color: #666;">3.5g | H4CBH 350mg / CBD 250mg / CBG 250mg</p>
+                </div>
+                <div class="card" style="margin:0; padding: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <strong style="font-size: 14px;">H4CBH ハーブ 3.5g レモンヘイズ <span
+                                style="font-size: 10px; color:#888;"></span></strong>
+                        <span style="color: var(--accent-green); font-weight: bold; font-family: 'Jost';">¥5,500</span>
+                    </div>
+                    <p style="font-size: 10px; color: #666;">3.5g | H4CBH 150mg / CBD 300mg / CBG 300mg</p>
+                </div>
+                <!-- HHBD Series -->
+                <div class="card" style="margin:0; padding: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <strong style="font-size: 14px;">HHBD ハーブ 3.5g ブルドリ <span
+                                style="font-size: 10px; color:#888;">(HHBD中)</span></strong>
+                        <span style="color: var(--accent-green); font-weight: bold; font-family: 'Jost';">¥6,200</span>
+                    </div>
+                    <p style="font-size: 10px; color: #666;">3.5g | HHBD 470mg / CBD 150mg / CBG 150mg</p>
+                </div>
+                <div class="card" style="margin:0; padding: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <strong style="font-size: 14px;">HHBD ハーブ 3.5g マンゴー <span
+                                style="font-size: 10px; color:#888;">(HHBD弱)</span></strong>
+                        <span style="color: var(--accent-green); font-weight: bold; font-family: 'Jost';">¥4,500</span>
+                    </div>
+                    <p style="font-size: 10px; color: #666;">3.5g | HHBD 250mg / CBD 200mg / CBG 200mg</p>
+                </div>
+                <!-- Blend Series -->
+                <div class="card" style="margin:0; padding: 15px; border: 1px solid var(--text-gold);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <strong style="font-size: 14px;">HHBD+H4CBH ハーブ 3.5g</strong>
+                        <span style="color: var(--accent-green); font-weight: bold; font-family: 'Jost';">¥7,500</span>
+                    </div>
+                    <p style="font-size: 10px; color: #666;">3.5g | HHBD 300mg / H4CBH 150mg / CBD 100mg / CBG 100mg</p>
+                </div>
+            </div>
+
+            <!-- Botanical Fruits Terpene Section -->
+            <div
+                style="font-family: 'Jost'; font-weight: 600; font-size: 16px; margin-bottom: 12px; border-left: 4px solid var(--text-gold); padding-left: 10px;">
+                Botanical Fruits Terpene</div>
+
+            <!-- CBD Lineup (Previously potentially truncated) -->
+            <div class="card" style="margin-bottom: 12px; border-left: 4px solid #4ade80;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="font-size: 16px; font-weight: 700;">CBD ジョイント</h3>
+                    <span
+                        style="background: #4ade80; color: white; border-radius: 12px; padding: 2px 8px; font-size: 10px; font-weight: bold;">Mellow</span>
+                </div>
+                <p style="font-size: 10px; color: #666; margin: 4px 0 10px;">1本入り / 0.8g</p>
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <ul style="list-style: none; font-size: 11px; color: #555;">
+                        <li>● OG Kush</li>
+                        <li>● Lemon Haze</li>
+                    </ul>
+                    <span style="font-size: 16px; font-weight: 600; font-family: 'Jost';">¥1,200</span>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 12px; border-left: 4px solid #facc15;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="font-size: 16px; font-weight: 700;">CBG ジョイント</h3>
+                    <span
+                        style="background: #facc15; color: white; border-radius: 12px; padding: 2px 8px; font-size: 10px; font-weight: bold;">Focus</span>
+                </div>
+                <p style="font-size: 10px; color: #666; margin: 4px 0 10px;">1本入り / 0.8g</p>
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <ul style="list-style: none; font-size: 11px; color: #555;">
+                        <li>● White Widow</li>
+                        <li>● Pineapple Express</li>
+                    </ul>
+                    <span style="font-size: 16px; font-weight: 600; font-family: 'Jost';">¥1,400</span>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: 12px; border-left: 4px solid #a8a29e;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="font-size: 16px; font-weight: 700;">CBN ジョイント</h3>
+                    <span
+                        style="background: #a8a29e; color: white; border-radius: 12px; padding: 2px 8px; font-size: 10px; font-weight: bold;">Sleep</span>
+                </div>
+                <p style="font-size: 10px; color: #666; margin: 4px 0 10px;">1本入り / 0.8g</p>
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <ul style="list-style: none; font-size: 11px; color: #555;">
+                        <li>● Blue Dream</li>
+                        <li>● Granddaddy Purple</li>
+                    </ul>
+                    <span style="font-size: 16px; font-weight: 600; font-family: 'Jost';">¥1,500</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. LIQUID & WAX (Restored & Styled) -->
+        <section id="liquid">
+            <div class="product-header" style="margin-bottom: 30px;">
+                <p class="section-subtitle">VAPE & CONCENTRATE</p>
+                <h2 class="section-title">Liquid & Wax</h2>
+            </div>
+
+            <img src="./image/liquid.png" class="feature-img" alt="Liquid Product"
+                style="object-position: center; display:none;"> <!-- Placeholder if exists -->
+
+            <div class="card card-dark">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h3 style="font-size: 20px; font-family: 'Jost'; color: var(--text-gold);">Premium Alchemist Blend
+                    </h3>
+                    <span class="tag-new">NEW</span>
+                </div>
+                <div style="margin: 20px 0; font-size: 13px; color: #ddd; line-height: 1.8;">
+                    <div
+                        style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 5px 0;">
+                        <span>H4CBDH</span> <span>15.7%</span>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 5px 0;">
+                        <span>CBG</span> <span>36.6%</span>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 5px 0;">
+                        <span>CBN</span> <span>36.6%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 5px 0;">
+                        <span>Terpene</span> <span>10.0%</span>
+                    </div>
+                </div>
+                <div style="text-align: right; font-size: 24px; font-weight: 700; font-family: 'Jost'; color: white;">
+                    6,000円
+                </div>
+                <p style="text-align: right; font-size: 10px; color: #888;">0.5ml / 510 Thread</p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer style="background: #111; color: white; text-align: center; padding: 60px 20px;">
+            <img src="./image/dj_logo.png" class="main-logo" alt="Logo" style="width: 80px; margin-bottom: 20px;">
+            <p style="font-size: 10px; opacity: 0.5; margin-bottom: 10px;">DISPENSARY JAPAN</p>
+            <p style="font-size: 10px; opacity: 0.3;">2026 Early Spring Catalog</p>
+        </footer>
+
+        <!-- PDF生成ボタン -->
+        <button onclick="generatePDF()" class="pdf-btn">
+            <i class="fa-solid fa-file-pdf"></i> Download Catalog
+        </button>
+
+    </div>
+
+    <!-- Script for client-side PDF (optional usage) -->
+    <script>
+        function generatePDF() {
+            const element = document.getElementById('catalog');
+            const opt = {
+                margin: 0,
+                filename: 'DJ2026_earlyspring_catalog.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: [100, 210], orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+</body>
+
+</html>
