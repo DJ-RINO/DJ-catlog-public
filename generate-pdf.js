@@ -24,8 +24,13 @@ const path = require('path');
     // Wait for images to load
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    // Get the full page height after print styles applied
+    // Get the exact height up to the bottom of the footer
     const bodyHeight = await page.evaluate(() => {
+        const footer = document.querySelector('footer');
+        if (footer) {
+            const rect = footer.getBoundingClientRect();
+            return rect.bottom + window.scrollY;
+        }
         return document.body.scrollHeight;
     });
 
