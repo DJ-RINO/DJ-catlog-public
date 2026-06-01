@@ -24,29 +24,17 @@ const path = require('path');
     // Wait for images to load
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    // Get the exact height up to the bottom of the footer
-    const bodyHeight = await page.evaluate(() => {
-        const footer = document.querySelector('footer');
-        if (footer) {
-            const rect = footer.getBoundingClientRect();
-            return rect.bottom + window.scrollY;
-        }
-        return document.body.scrollHeight;
-    });
-
-    console.log(`Page height: ${bodyHeight}px`);
-
-    // Generate a single long PDF page (no page breaks)
+    // Generate a multiple page PDF optimized for smartphones (390px x 844px per page)
     await page.pdf({
-        path: 'DJ2026_earlyspring_catalog.pdf',
+        path: 'DJ2026_summer_catalog.pdf',
         width: `${mobileWidth}px`,
-        height: `${bodyHeight}px`,
+        height: '844px',
         printBackground: true,
         margin: { top: 0, right: 0, bottom: 0, left: 0 }
     });
 
-    console.log('PDF generated: DJ2026_earlyspring_catalog.pdf');
-    console.log(`Size: ${mobileWidth}px x ${bodyHeight}px (single page)`);
+    console.log('PDF generated: DJ2026_summer_catalog.pdf');
+    console.log(`Size: ${mobileWidth}px x 844px per page (multiple pages)`);
 
     await browser.close();
 })();

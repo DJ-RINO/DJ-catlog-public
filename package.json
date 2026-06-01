@@ -1,0 +1,15 @@
+{
+  "name": "dj_catalog",
+  "version": "1.0.0",
+  "description": "## プロジェクト概要 Dispensary Japanの2025年冬コレクション用デジタルカタログ（LP）。 モバイルファーストの縦型デザインで、Apple製品ページのような「Modern Organic」な高級感を志向しています。",
+  "main": "generate-pdf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^24.43.1"
+  }
+}
