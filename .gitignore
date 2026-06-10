@@ -4,3 +4,13 @@ node_modules/
 .tempmediaStorage/
 captured_pages/
 *.log
+
+# --- 標準シークレット除外パターン (2026-06-10追加) ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+venv/
+logs/
+__pycache__/
