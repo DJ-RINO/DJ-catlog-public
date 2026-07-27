@@ -2,7 +2,16 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 
 (async () => {
-    const browser = await puppeteer.launch();
+    let browser;
+    try {
+        browser = await puppeteer.launch({
+            executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+            headless: true
+        });
+    } catch (e) {
+        browser = await puppeteer.launch({ headless: true });
+    }
+
     const page = await browser.newPage();
 
     // iPhone 13 viewport width
@@ -24,7 +33,7 @@ const path = require('path');
     // Wait for images to load
     await new Promise(resolve => setTimeout(resolve, 3000));
 
-    // Generate a multiple page PDF optimized for smartphones (390px x 844px per page)
+    // 1. フルバージョン（全10ページ）のPDFを生成
     await page.pdf({
         path: 'DJ2026_summer_catalog.pdf',
         width: `${mobileWidth}px`,
@@ -32,9 +41,18 @@ const path = require('path');
         printBackground: true,
         margin: { top: 0, right: 0, bottom: 0, left: 0 }
     });
+    console.log('PDF generated: DJ2026_summer_catalog.pdf (Full 10 pages)');
 
-    console.log('PDF generated: DJ2026_summer_catalog.pdf');
-    console.log(`Size: ${mobileWidth}px x 844px per page (multiple pages)`);
+    // 2. 5ページ限定バージョンのPDFを生成
+    await page.pdf({
+        path: 'DJ2026_summer_catalog_5pages.pdf',
+        width: `${mobileWidth}px`,
+        height: '844px',
+        pageRanges: '1-5',
+        printBackground: true,
+        margin: { top: 0, right: 0, bottom: 0, left: 0 }
+    });
+    console.log('PDF generated: DJ2026_summer_catalog_5pages.pdf (Limited to 5 pages)');
 
     await browser.close();
 })();

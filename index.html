@@ -396,6 +396,11 @@
         }
 
         /* --- PDF PRINT MEDIA 調整 --- */
+        @page {
+            size: 390px 844px;
+            margin: 0;
+        }
+
         @media print {
             * {
                 -webkit-print-color-adjust: exact !important;
@@ -403,10 +408,11 @@
                 box-sizing: border-box !important;
             }
 
-            body {
-                background-color: var(--bg-body) !important;
+            html, body {
+                background-color: #000000 !important;
                 margin: 0 !important;
                 padding: 0 !important;
+                width: 390px !important;
             }
 
             .pdf-btn {
@@ -425,8 +431,12 @@
             .pdf-page {
                 box-shadow: none !important;
                 border-radius: 0 !important; /* PDFの端をピッタリ角に */
+                border: none !important;
+                outline: none !important;
                 page-break-after: always !important;
                 break-after: page !important;
+                margin: 0 !important;
+                width: 390px !important;
             }
         }
     </style>
@@ -857,7 +867,7 @@
                                 <strong style="font-size: 12px; font-weight: 700;">HHBD ハーブ マンゴー <span style="font-size: 8px; color:#86868b; font-weight: bold;">(低濃度)</span></strong>
                                 <p style="font-size: 9px; color: #666; margin-top: 1px;">3.5g | HHBD 250mg / CBD 200mg / CBG 200mg</p>
                             </div>
-                            <span style="color: var(--accent-green); font-weight: 700; font-family: 'Jost'; font-size: 14px;">¥4,500</span>
+                            <span style="color: var(--accent-green); font-weight: 700; font-family: 'Jost'; font-size: 14px;">¥5,500</span>
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
@@ -900,13 +910,7 @@
                             </div>
                             <span style="font-size: 13px; font-weight: 700; font-family: 'Jost';">¥8,000</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <strong style="font-size: 12px; font-weight: 700;">CBN ジョイント <span style="font-size: 7px; background: #a8a29e; color: white; padding: 1px 5px; border-radius: 4px; font-weight: 700; font-family: 'Jost';">SLEEP</span></strong>
-                                <p style="font-size: 9px; color: #666; margin-top: 1px;">10本入り | Blue Dream / Granddaddy Purple</p>
-                            </div>
-                            <span style="font-size: 13px; font-weight: 700; font-family: 'Jost';">¥8,000</span>
-                        </div>
+                        <!-- CBN ジョイントは指定薬物規制により取り扱い終了（2026-07-25）。掲載しない -->
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
                                 <strong style="font-size: 12px; font-weight: 700;">HHBD+H4CBH ジョイント <span style="font-size: 7px; background: var(--text-gold); color: white; padding: 1px 5px; border-radius: 4px; font-weight: 700; font-family: 'Jost';">STRONG</span></strong>
@@ -959,11 +963,11 @@
                                 <span style="font-size: 8px; font-weight: 700; color: var(--text-gold); opacity: 0.8; font-family: 'Jost';">1.0ml Capacity</span>
                                 <div style="display: flex; justify-content: space-between; font-size: 9px; margin-top: 2px;">
                                     <span style="color: #ddd;">CBD Profile</span>
-                                    <span style="font-weight: 700; color: white;">¥2,200</span>
+                                    <span style="font-weight: 700; color: white;">¥3,000</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; font-size: 9px; margin-top: 1px;">
                                     <span style="color: #ddd;">DG <small style="color:#888;">(CBD/CBG)</small></span>
-                                    <span style="font-weight: 700; color: white;">¥2,400</span>
+                                    <span style="font-weight: 700; color: white;">¥2,800</span>
                                 </div>
                             </div>
                         </div>
